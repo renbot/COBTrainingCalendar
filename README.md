@@ -1,7 +1,7 @@
 # COBTrainingCalendar
-<b>Internal Staff Training Calendar for City of Burnaby</b>
+<b>Staff Training Calendar for City of Burnaby</b>
 
-This course calendar was created for internal use by staff at the City of Burnaby in 2015 to streamline the course discovery, course path and registry process.
+This course calendar was created for use by staff at the City of Burnaby in 2015 to streamline the course discovery, course path and registry process.
 
 <a href="https://cdn.rawgit.com/renbot/COBTrainingCalendar/master/entry.html#/" target="_blank">Preview output here</a>
 
