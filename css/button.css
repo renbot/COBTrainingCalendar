@@ -1,0 +1,34 @@
+.button {
+  min-height: 30px;
+  padding: 3px 10px;
+  border-radius: 5px;
+  background-color: transparent;
+  margin-top: 5px;
+  outline: none;
+}
+
+.button-it {
+  border: 1px solid #55c4e9;
+  color: #55c4e9;
+  width: 125px;
+}
+
+.button-it:hover {
+  background-color: #55c4e9;
+  color: #FFFFFF;
+}
+
+.button.button-hr {
+  border: 1px solid #ff8d7b;
+  color: #ff8d7b;
+  width: 125px;
+}
+
+.button-hr:hover{
+  background-color: #ff8d7b;
+  color: #FFFFFF;
+} /*end course-modal-left*/
+
+.multi-day {
+  margin: 15px 0;
+}

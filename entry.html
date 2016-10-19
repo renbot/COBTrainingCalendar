@@ -1,0 +1,469 @@
+<!doctype html>
+<html ng-app="itCalApp">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="UTF-8">
+    <title>CoB IT Calendar 2016</title>
+    <link rel="stylesheet" href="bower_components/fullcalendar/dist/fullcalendar.css"/>
+    <script src="data.js"></script>
+    <script src="data2.js"></script>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/moment/min/moment.min.js"></script>
+    <script src="bower_components/underscore/underscore.js"></script>
+    <script src="bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-filter/dist/angular-filter.min.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="bower_components/angular-modal-service/dst/angular-modal-service.min.js"></script>
+    <script src="bower_components/angular-moment/angular-moment.min.js"></script>
+    <script src="bower_components/angulartics/dist/angulartics.min.js"></script>
+    <script src="bower_components/angulartics-google-analytics/dist/angulartics-google-analytics.min.js"></script>
+    <script src="bower_components/angular-ui-calendar/src/calendar.js"></script>
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+    <link rel="stylesheet" type="text/css" href="bower_components/normalize-css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="css/base.css">
+    <link rel="stylesheet" type="text/css" href="css/fonts.css">
+    <link rel="stylesheet" type="text/css" href="css/header.css">
+    <link rel="stylesheet" type="text/css" href="css/typography.css">
+    <link rel="stylesheet" type="text/css" href="css/utils.css">
+    <link rel="stylesheet" type="text/css" href="css/modal.css">
+    <link rel="stylesheet" type="text/css" href="css/button.css">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" type="text/css" href="css/learning.css">
+    <link rel="stylesheet" type="text/css" href="css/calendar.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  </head>
+  <body ng-controller="rootController">
+
+  <header>
+    <!--top bar-->
+    <div class="header">
+      <div class="headerlogo-1"><img src="img/Bby-logo-white.png"></div>
+      <div class="headerlogo-2"><img src="img/ConnectBurnaby-Logo-white.png"></div>
+      <div class ="headertext"><h2>Training Calendar</h2></div>
+    </div>
+  </header>
+    <!--end of top bar-->
+
+    <!--Everything under top bar-->
+
+    <section id="primary-nav" class="menu-bar">
+      <ul class="primary-nav-list noselect">
+        <li ui-sref="home" ui-sref-active="active"><i class="icon icon-home"></i><div class="text">Home</div><div class="arrow-right"></li>
+        <li ui-sref="itpaths" ui-sref-active="active"><i class="icon icon-paths"></i><div class="text">IT Learning Paths</div><div class="arrow-right"></li>
+        <li ui-sref="hrpaths" ui-sref-active="active"><i class="icon icon-believeachieve"></i><div class="text">Believe & Achieve Collections</div><div class="arrow-right"></li>
+        <li ui-sref="calendar" ui-sref-active="active"><i class="icon icon-calendar"></i><div class="text">Calendar</div><div class="arrow-right"></li>
+        <li ui-sref="catalog" ui-sref-active="active"><i class="icon icon-catalogue"></i><div class="text">Course Catalogue</div><div class="arrow-right"></li>
+      </ul>
+    </section>
+
+    <section class="secondary-nav shadow" ng-show="$state.is('itpaths');">
+      <ul class="secondary-nav-list noselect">
+        <li ng-repeat="path in itLearningPaths | orderBy: 'name'" ui-sref="itpaths({ 'path': path.key })" ui-sref-active="active" ng-bind-html="path.name | to_trusted"></li>
+      </ul>
+      <div class="it-facilities-map">
+        <a href="http://epstein.city.burnaby.bc.ca.proxy:50800/irj/go/km/docs/documents/Public%20Documents/Reference%20%26%20Support/Training%20Courses%20%26%20Schedule/Map%20to%20the%20Training%20Facilities.pdf" target="_blank">Map of IT Training facilities</a>
+      </div>
+    </section>
+
+    <section class="secondary-nav shadow" ng-show="$state.is('hrpaths');">
+      <!--<div class="hr_heading"><h2>Leadership</h2></div>-->
+      <ul class="secondary-nav-list">
+        <!--<li><h2>Leadership <br/>Collections</h2></li>-->
+        <li ng-repeat="(key, item) in CONFIG.hrmenu" ui-sref="hrpaths({ 'path': key })" ui-sref-active="active" ng-bind-html="item.menutitle | to_trusted"></li>
+      </ul>
+      <div class="it-facilities-map">
+        <a href="http://epstein.city.burnaby.bc.ca.proxy:50800/irj/servlet/prt/portal/prtroot/com.sap.nw.pcc.xmleditor.XMLDocumentDefaultRenderer?snippetid=/guid/50bb5c26-993b-3310-6393-9facb1a4be67" target="_blank">Leadership Development at the City</a> </br>
+        <a href="http://epstein.city.burnaby.bc.ca.proxy:50800/irj/servlet/prt/portal/prtroot/com.sap.nw.pcc.xmleditor.XMLDocumentDefaultRenderer?snippetid=/guid/40fe7426-993b-3310-d0b0-9977aec3ae9f" target="_blank">Believe & Achieve Print Calendar</a>
+      </div>
+    </section>
+
+    <section class="secondary-nav catalog" ng-show="$state.is('catalog');">
+      <div class="filter-heading">Filter list by:</div>
+      <div class="filter-it">
+        <ul class="secondary-nav-list">
+          <li class="filter-all" ui-sref="catalog({ 'type': 'it', 'subtype': 'all' })" ui-sref-active="active" ui-sref-opts="{ reload: true }"><strong>All IT Courses</strong></li>
+          <li ui-sref="catalog({ 'type': 'it', 'subtype': 'eAgenda' })" ui-sref-active="active">eAgenda</li>
+          <li ui-sref="catalog({ 'type': 'it', 'subtype': 'SAP' })" ui-sref-active="active">SAP</li>
+          <li ui-sref="catalog({ 'type': 'it', 'subtype': 'Virtual City Hall' })" ui-sref-active="active">Virtual City Hall</li>
+        </ul>
+      </div>
+      <div class="filter-hr">
+        <ul class="secondary-nav-list">
+          <li class="filter-all" ui-sref="catalog({ 'type': 'hr', 'subtype': 'all' })" ui-sref-active="active" ui-sref-opts="{ reload: true }"><strong>All Believe &amp; Achieve Courses</strong></li>
+          <li ui-sref="catalog({ 'type': 'hr', 'subtype': 'Your Learning' })" ui-sref-active="active">Your Learning</li>
+          <li ui-sref="catalog({ 'type': 'hr', 'subtype': 'Your Career' })" ui-sref-active="active">Your Career</li>
+          <li ui-sref="catalog({ 'type': 'hr', 'subtype': 'Learning for the City' })" ui-sref-active="active">Learning for the City</li>
+        </ul>
+      </div>
+      <div class="catalog-menu-spacer-HACK"></div>
+      <div class="path-wrapper catalog">
+        <div class="legend-icon">
+          <span class="icon icon-instructor"></span>
+           Instructor Led Course
+        </div>
+        <div class="legend-icon">
+          <span class="icon icon-computer"></span>
+           Online Course
+        </div>
+        <div class="legend-icon">
+          <span class="icon icon-request"></span>
+           Course by Request
+        </div>
+        <div class="legend-icon" ng-show="$stateParams.type === 'hr'">
+          <span class="icon icon-thoughtx"></span>
+           Result of ThoughtExchange
+        </div>
+        <div class="legend-icon" ng-show="$stateParams.type === 'hr'">
+          <span class="icon icon-gears"></span>
+           Systems Courses
+        </div>
+        <div class="legend-icon" ng-show="$stateParams.type === 'hr'">
+          <span class="icon icon-person"></span>
+           Self Courses
+        </div>
+        <div class="legend-icon" ng-show="$stateParams.type === 'hr'">
+          <span class="icon icon-hands"></span>
+           Social Courses
+        </div>
+        <div class="legend-icon" ng-show="$stateParams.type === 'hr'">
+          <span class="icon icon-brain"></span>
+           Strategy Courses
+        </div>
+      </div>
+
+    </section>
+
+    <section id="content" ng-class="{ 'full-width': $state.is('home'), 'full-span': $state.is('calendar'), 'dualnav': $state.is('itpaths') || $state.is('hrpaths') || $state.is('catalog') }" ui-view></section>
+
+    <!-- TEMPLATES -->
+    <script type="text/ng-template" id="templates/home.html">
+
+      <div class="background-home">
+      <div class="homepagetext">
+
+        <div class="welcome">
+          <div class="bigwelcome">Welcome</div>
+          <div class='smalltext'>to the 2016 City of Burnaby Training Calendar</div>
+        </div>
+
+        <div class="description">
+          The connectBurnaby Training calendar provides City staff with an overview of the technical and development courses that are available. Explore the IT Learning Paths to see which technical courses are needed for specific roles and explore Believe and Achieve courses to enhance your professional development.
+        </div>
+      </div>
+    </script>
+
+    <script type="text/ng-template" id="templates/itpaths.html">
+      <!--IT-->
+      <div class="path-wrapper shadow" ng-repeat="role in roles">
+        <h2>{{ role }}</h2>
+        <div class="course-card-wrapper" ng-repeat="course in courses | filter:orderByRole(role)" ng-click="showCourseModal(course)">
+          <div class="course-card it" ng-class="{ 'light': $odd, 'dark': $even, 'small': false, 'optional': course.isOptional }">
+            <p>{{ course.name }}</p>
+            <p class="time">{{ course.duration }} {{ (course.duration | parseFloat) <= 1.0 ? 'hr':'hrs'}}</p>
+            <ul>
+              <li ng-show="!course.onlineOnly"><span class="icon icon-instructor"></span></li>
+              <li ng-show="course.isOnline || course.onlineOnly"><span class="icon icon-computer"></span></li>
+              <li ng-show="course.isByRequest"><span class="icon icon-request"></span></li>
+            </ul>
+          </div>
+          <div ng-class="{ 'arrow-right-light': $odd, 'arrow-right-dark': $even }" ng-if="!$last"></div>
+
+        </div>
+      </div>
+
+      <br>
+      <div class="path-wrapper shadow"> <!-- begin Legend -->
+
+        <h3>Legend</h3>
+
+          <div class="course-card-wrapper legend-wrapper">
+            <div class="course-card light legend "></div>
+            <div class="course-card dark legend"></div>
+            <p class="legend-text">Mandatory Course</p>
+          </div>
+
+          <div class="course-card-wrapper legend-wrapper">
+            <div class="course-card light legend optional "></div>
+            <div class="course-card dark legend optional dark2"></div>
+            <p class="legend-text">Optional Course</p>
+          </div>
+
+        <div class="legend-block">
+          <div class="legend-icon">
+            <span class="icon icon-computer"></span> Online Course
+          </div>
+
+          <div class="legend-icon">
+            <span class="icon icon-instructor"></span> Instructor Led Course
+          </div>
+
+          <div class="legend-icon">
+            <span class="icon icon-request"></span> Course by Request
+          </div>
+        </div>
+
+      </div> <!--end Legend-->
+
+    </script> <!--end IT-->
+
+    <script type="text/ng-template" id="templates/hrpaths.html">
+
+      <div class="hr content-wrapper">
+        <div class="text-wrapper"> <!-- Believe and Achieve intro -->
+          <h2><font color="#FFFFF">Believe and Achieve Collections</font></h2>
+            <hr>
+          <div id="BA-introtext">
+            <p>The Believe &amp; Achieve Collections have been created to help staff navigate the different courses within the Believe &amp; Achieve Learning Calendar - highlighting those most relevant for staff in their current work or the career direction they wish to embark on. </p>
+
+            <p>We have started with Leadership Collections, groups of courses recommended for leaders to take to become more skilled and confident in their roles. There are four leadership categories to explore:</p>
+
+            <ul>
+              <li>Emerging leaders</li>
+              <li>Foundation leadership skills for supervisors and managers</li>
+              <li>Advanced leadership skills for managers</li>
+              <li>Ongoing leadership development</li>
+            </ul>
+            <br />
+          </div>
+
+        </div> <!-- end Believe and Achieve intro -->
+
+        <!--end category block-->
+
+      </div> <!-- end content-wrapper -->
+
+
+
+  <!---------- 2. COURSES ------------>
+      <div class="course-wrapper shadow"> <!-- begin Emerging Leaders -->
+
+        <h2>{{ CONFIG.hrmenu[$stateParams.path].menutitle | removeBreaks }}</h2>
+        <p>{{ CONFIG.hrmenu[$stateParams.path].description }}</p>
+
+        <div class="course-card-wrapper" ng-repeat="course in hrcourses | unique:'name' | filter:hasPath($stateParams.path)" ng-click="showCourseModal(course)">
+          <div class="course-card hr" ng-class="{ 'light': $odd, 'dark': $even }">
+            <p>{{ course.name }}</p>
+            <p class="time"><span ng-if="course.duration">{{ course.duration }} {{ (course.duration | parseFloat) <= 1.0 ? 'hr':'hrs'}}</span><span ng-if="!course.duration && !course.weblink">TBD</span><span ng-if="course.totalInSeries && course.totalInSeries > 1"> ({{ course.totalInSeries }} days)</span></p>
+            <ul>
+              <li ng-show="course.facilitator && course.facilitator.length"><span class="icon icon-instructor"></span></li>
+              <li ng-show="course.weblink"><span class="icon icon-computer"></span></li>
+              <li ng-show="course.availability === 'By Request'"><span class="icon icon-request"></span></li>
+              <li ng-show="course.thoughtexchange"><span class="icon icon-thoughtx"></span></li>
+              <li ng-show="course.competencies | contains:'Self'"><span class="icon icon-person"></span></li>
+              <li ng-show="course.competencies | contains:'Strategy'"><span class="icon icon-brain"></span></li>
+              <li ng-show="course.competencies | contains:'Social'"><span class="icon icon-hands"></span></li>
+              <li ng-show="course.competencies | contains:'Systems'"><span class="icon icon-gears"></span></li>
+            </ul>
+          </div>
+        </div>
+
+      </div> <!--end first course wrapper --><br>
+
+      <div class="path-wrapper shadow"> <!-- begin Legend -->
+
+        <h3>Legend</h3>
+
+        <div class="legend-block">
+          <div class="legend-icon">
+            <span class="icon icon-computer"></span> Online Course
+          </div>
+          <div class="legend-icon">
+            <span class="icon icon-instructor"></span> Instructor Led Course
+          </div>
+          <div class="legend-icon">
+            <span class="icon icon-request"></span> Course by Request
+          </div>
+          <div class="legend-icon">
+              <span class="icon icon-thoughtx"></span>Result of Thought<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exchange
+          </div>
+        </div>
+
+        <div class="legend-block">
+          <div class="legend-icon">
+              <span class="icon icon-gears"></span>&nbsp;Systems
+          </div><br>
+          <div class="legend-icon">
+              <span class="icon icon-person"></span>&nbsp;Self
+          </div><br>
+          <div class="legend-icon">
+              <span class="icon icon-hands"></span>&nbsp;Social
+          </div>
+          <div class="legend-icon">
+              <span class="icon icon-brain"></span>&nbsp;Strategy
+          </div><br>
+        </div>
+
+      </div> <!--end Legend-->
+
+    </script>
+
+    <script type="text/ng-template" id="templates/calendar.html">
+      <div class="calendar-event-popup">
+        <!--<div class="calendar-event-content">-->
+        <div class="calendar-event-title" ng-class="{ 'it-color': event.type === 'it', 'hr-color': event.type === 'hr' }">{{ event.title }}<span ng-if="event.totalInSeries && event.totalInSeries > 1"> ({{ event.totalInSeries }} days)</span></div>
+        <div class="calendar-event-datetime">{{ (event.start| toDateObj | date:'EEEE, MMMM d, h:mm a') + '-' + ( event.end | toDateObj | date:'h:mm a') }}</div>
+        <div class="calendar-event-details-control">Course Details</div>
+        <hr>
+        <p class="calendar-event-details" ng-bind-html="event.description | to_trusted"></p>
+        <p ng-if="event.type === 'it'">In this course you will learn to:</p>
+        <ul class="course-objectives">
+          <li ng-repeat="objective in event.objectives">{{ objective }}</li>
+        </ul>
+        <a ng-href="{{ (event.type === 'it' ? 'mailto:ittraining@burnaby.ca?subject=Please register me for ' + event.title + ' on ' + (event.start | toDateObj | date:'MMM dd') + '&body=Do you have the proper course prerequisites? %0D%0A%0D%0ADid you remember to cc your manager?':'mailto:Learning@burnaby.ca?subject=Please register me for ' + event.title + ' on ' + (event.start | toDateObj | date:'MMM dd') + '&body=Please ensure you have prior approval from your supervisor or manager prior to sending this registration email.%0D%0A%0D%0ARemember to CC your manager on this email. %0D%0A%0D%0APlease indicate your position class (RFT/RPT/TFT/AUX):%0D%0A%0D%0APlease indicate your cost centre (in case of no show):') }}"><button class="button calendar-event-register-btn" ng-class="{ 'button-it': event.type === 'it', 'button-hr': event.type === 'hr' }">Register</button></a>
+
+        <div class="anchor">
+          <div class="arrow-down"></div>
+        </div>
+      </div>
+      <div ui-calendar="config.calendar" ng-model="eventSources"></div>
+      <div class="legend-calendar">
+        <div class="legend-icon">
+          <div class="legend-square-it"></div>
+           IT Courses
+        </div>
+        <div class="legend-icon">
+          <div class="legend-square-hr"></div>
+           Believe & Achieve Courses
+        </div>
+      </div>
+    </script>
+
+    <script type="text/ng-template" id="templates/catalog.html">
+
+      <form id="catalog-search">
+        <i class="fa fa-search"></i>
+        <input name="search" placeholder="{{ $stateParams.type === 'it' ? 'Search all IT courses by name':'Search all Believe & Achieve courses by name' }}" type="text" maxlength="50" size="40" ng-model="query" ng-click="prepareSearch()" />
+        <i class="fa fa-times" ng-show="!!query" ng-click="query = ''"></i>
+      </form>
+
+      <!--catalog placeholder // IT > SAP > Finance -->
+      <div class="catalog-content" ng-repeat="course in courses | filterBy:['name']:query | unique:'area' | filter:filterEmptyArea | filter: ofSubType" ng-if="type === 'it'">
+        <div class="course-wrapper shadow" ng-repeat="_course in courses | filterBy:['name']:query | filterBy:['area']:course.area | unique:'subarea'">
+
+          <h2>{{ _course.area }}</h2>
+          <h3>{{ _course.subarea }}</h3>
+
+          <div class="course-card-wrapper" ng-repeat="__course in courses | filterBy:['name']:query | filterBy:['area']:_course.area | filterBy:['subarea']:_course.subarea | unique:'name'" ng-click="showCourseModal(__course)">
+            <div class="course-card it light">
+              <p>{{ __course.name }}</p>
+              <p class="time">{{ __course.duration }} {{ (__course.duration | parseFloat) <= 1.0 ? 'hr':'hrs'}}</p>
+              <ul>
+                <li ng-show="!__course.onlineOnly"><span class="icon icon-instructor"></span></li>
+                <li ng-show="__course.isOnline || __course.onlineOnly"><span class="icon icon-computer"></span></li>
+                <li ng-show="__course.isByRequest"><span class="icon icon-request"></span></li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="catalog-content" ng-repeat="path in CONFIG.hrcatalog | filter: ofSubType" ng-if="type === 'hr'">
+        <div class="course-wrapper shadow" ng-repeat="subgroup in path.competencies" ng-if="(hrcourses | filterBy:['name']:query | filter:hrGroup(path.name) | filter:hrSubGroup(subgroup) | unique:'name').length > 0">
+          <h2>{{ path.name }}</h2>
+          <h3>{{ subgroup || '&nbsp;' }}</h3>
+
+          <div class="course-card-wrapper" ng-repeat="course in hrcourses | filterBy:['name']:query | filter:hrGroup(path.name) | filter:hrSubGroup(subgroup) | unique:'name'" ng-click="showCourseModal(course)">
+            <div class="course-card hr light">
+              <p>{{ course.name }}</p>
+              <p class="time"><span ng-if="course.duration">{{ course.duration }} {{ (course.duration | parseFloat) <= 1.0 ? 'hr':'hrs'}}</span><span ng-if="!course.duration && !course.weblink">TBD</span><span ng-if="course.totalInSeries && course.totalInSeries > 1"> ({{ course.totalInSeries }} days)</span></p>
+
+              <ul>
+                <li ng-show="course.facilitator && course.facilitator.length"><span class="icon icon-instructor"></span></li>
+                <li ng-show="course.weblink"><span class="icon icon-computer"></span></li>
+                <li ng-show="course.availability === 'By Request'"><span class="icon icon-request"></span></li>
+                <li ng-show="course.thoughtexchange"><span class="icon icon-thoughtx"></span></li>
+                <li ng-show="course.competencies | contains:'Self'"><span class="icon icon-person"></span></li>
+                <li ng-show="course.competencies | contains:'Strategy'"><span class="icon icon-brain"></span></li>
+                <li ng-show="course.competencies | contains:'Social'"><span class="icon icon-hands"></span></li>
+                <li ng-show="course.competencies | contains:'Systems'"><span class="icon icon-gears"></span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </script>
+
+    <script type="text/ng-template" id="templates/_course_modal.html">
+      <section class="wrapper modal"> <!--dark overlay effect-->
+
+        <!-- 1. MODAL CONTENT DESCRIPTION -->
+        <div class="modal-wrapper-inner modal-course" v-center>
+
+          <button class="icon-button right" ng-click="close()"><i class="fa fa-times"></i></button><br><hr> <!--end modal header -->
+
+          <div class="course-modal-left"> <!--left side content-->
+            <div class="course-card course-card-it" ng-class="{ 'it-bg': type === 'it', 'hr-bg': type === 'hr' }">
+              <p>{{ course.name }}</p>
+              <p ng-if="course.duration">{{ course.duration }} {{ (course.duration | parseFloat) <= 1.0 ? 'hr':'hrs'}}<span ng-if="course.totalInSeries && course.totalInSeries > 1"> ({{ course.totalInSeries }} days)</span></p>
+            </div>
+            <button class="button" ng-class="{ 'button-it': $stateParams.type === 'it', 'button-hr': $stateParams.type === 'hr' }" ng-hide="course.isByRequest || course.onlineOnly || !course.duration || !course.startDate" ng-click="showRegisterModal(course)">Register</button>
+            <a ng-href="{{ ($stateParams.type === 'it' ? 'mailto:ittraining@burnaby.ca?subject=I am interested in taking the ' + (course.name | uriComponentEncode) + ' course. Please contact me for further details.' + '&body=Do you have the proper course prerequisites? %0D%0A%0D%0ADid you remember to cc your manager?':'mailto:Learning@burnaby.ca?subject=I am interested in taking the ' + (course.name | uriComponentEncode) + ' course. Please contact me for further details.' + '&body=Thank you for your interest. Please send through this email and one of the HR Learning team will be in contact shortly.') }}" ng-show="course.isByRequest || course.availability === 'By Request'"><button class="button" ng-class="{ 'button-it': $stateParams.type === 'it', 'button-hr': $stateParams.type === 'hr' }">Request</button></a>
+            <!-- <a ng-href="{{ 'mailto:ittraining@burnaby.ca?subject=Please register me for ' + course.name + '&body=Do you have the proper course prerequisites? Did you remember to cc your manager?' }}" ng-show="course.onlineOnly"><button class="button button-it">Register</button></a> -->
+            <a ng-href="{{ course.url || course.weblink }}" ng-show="course.url || course.weblink" target="_blank"><button class="button" ng-class="{ 'button-it': $stateParams.type === 'it', 'button-hr': $stateParams.type === 'hr' }">Online Course</button></a>
+          </div>
+
+          <div class="course-modal-right"> <!--right side content-->
+            <p><span ng-bind-html="course.description | to_trusted"></span> <span ng-if="$stateParams.type === 'it'">In this course you will learn to:</span></p>
+            <p>
+              <ul>
+                <li ng-repeat="objective in course.objectives">{{ objective }}</li>
+              </ul>
+            </p>
+          </div>
+
+
+        </div> <!--end modal-wrapper-inner -->
+        <!-- end modal content description -->
+
+      </section> <!--end section wrapper // dark overlay effect -->
+    </script>
+
+    <script type="text/ng-template" id="templates/_register_modal.html">
+      <section class="wrapper"> <!--dark overlay effect-->
+
+        <!-- 2. MODAL CONTENT REGISTER -->
+        <div class="modal-wrapper-inner modal-register" v-center>
+
+          <button class="icon-button left hidden" ng-click="close(); closeParent()"><i class="fa fa-arrow-left"></i></button>
+          <button class="icon-button right" ng-click="close()"><i class="fa fa-times"></i></button>
+          <hr>
+
+          <ul class="date-list" ng-if="!course.totalInSeries || course.totalInSeries < 2">
+            <li ng-repeat="course in courses | filter:{name:course.name}:true "><a ng-href="{{ (type === 'it' ? 'mailto:ittraining@burnaby.ca?subject=Please register me for ' + (course.name | uriComponentEncode) + ' on ' + (course.startDate | toDateObj | date:'MMM dd') + '&body=Do you have the proper course prerequisites? %0D%0A%0D%0ADid you remember to cc your manager?':'mailto:Learning@burnaby.ca?subject=Please register me for ' + (course.name | uriComponentEncode) + ' on ' + (course.startDate | toDateObj | date:'MMM dd') + '&body=Please ensure you have prior approval from your supervisor or manager prior to sending this registration email.%0D%0A%0D%0ARemember to CC your manager on this email. %0D%0A%0D%0APlease indicate your position class* (RFT/RPT/TFT/AUX):%0D%0A%0D%0APlease indicate your cost centre (in case of no show):%0D%0A%0D%0A*Please note: Internal training is available to all regular and temporary, full time and part time employees. Auxiliary employees are welcome to attend internal training courses on their own time when space is available.') }}"><button class="button button-it-date" ng-class="{ 'button-it': $stateParams.type === 'it', 'button-hr': $stateParams.type === 'hr' }">{{ course.startDate | date:'MMM d, yyyy; h:mm a-' }}{{ course.endDate | date:'h:mm a' }}</button></a></li>
+          </ul>
+
+          <ul class="date-list" ng-if="course.totalInSeries && course.totalInSeries > 1">
+            <li>
+              <a ng-href="{{ (type === 'it' ? 'mailto:ittraining@burnaby.ca?subject=Please register me for ' + (course.name | uriComponentEncode) + ' on ' + (course.startDate | toDateObj | date:'MMM dd') + '&body=Do you have the proper course prerequisites? %0D%0A%0D%0ADid you remember to cc your manager?':'mailto:Learning@burnaby.ca?subject=Please register me for ' + (course.name | uriComponentEncode) + ' starting ' + (course.startDate | toDateObj | date:'MMM dd') + '&body=Please ensure you have prior approval from your supervisor or manager prior to sending this registration email.%0D%0A%0D%0ARemember to CC your manager on this email. %0D%0A%0D%0APlease indicate your position class* (RFT/RPT/TFT/AUX):%0D%0A%0D%0APlease indicate your cost centre (in case of no show):%0D%0A%0D%0A*Please note: Internal training is available to all regular and temporary, full time and part time employees. Auxiliary employees are welcome to attend internal training courses on their own time when space is available.') }}">
+                <button class="button button-it-date" ng-class="{ 'button-it': $stateParams.type === 'it', 'button-hr': $stateParams.type === 'hr' }">
+                  <div class="multi-day" ng-repeat="course in courses | filter:{name:course.name}:true">{{ course.startDate | date:'MMM d, yyyy; h:mm a-' }}{{ course.endDate | date:'h:mm a' }}</div>
+                </button>
+              </a>
+            </li>
+          </ul>
+
+        </div> <!-- end register modal-->
+
+
+      </section> <!--end section wrapper // dark overlay effect -->
+    </script>
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      if (location.host.indexOf('epstein.city.burnaby.bc.ca.proxy') > -1)
+        ga('create', 'UA-72987645-1', 'auto');
+      // ga('send', 'pageview');
+
+    </script>
+
+  </body>
+</html>

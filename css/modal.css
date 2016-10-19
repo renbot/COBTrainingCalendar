@@ -1,0 +1,146 @@
+
+.fa:hover {
+  color: #ccc;
+}
+
+.icon-button  {
+  background: none;
+  border: 0px;
+  box-shadow: none;
+  outline: none;
+}
+
+/************************************
+2. MODAL MAIN WRAPPERS */
+
+.wrapper {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 500;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.modal-wrapper-inner {
+  background-color: #FFFFFF;
+  padding: 2% 2%;
+  position:absolute;
+  top: 35%;
+  left: 50%;
+}
+
+
+/************************************
+ 3. DESCRIPTION MODAL */
+
+.modal-course {
+  width: 500px;
+  margin-left: -250px;
+  position: absolute;
+  padding: 15px 15px 40px 15px;
+}
+
+.right {
+  display: inline-block;
+  float: right;
+}
+
+/*course modal top*/
+.fa-times {
+  color: #DDD;
+}
+
+
+/* course-modal-left */
+.course-modal-left {
+  display: inline-block;
+  width: 30%;
+  padding-top: 2%;
+  padding-left: 2%;
+/*  border: 1px solid #000000;*/
+}
+
+.course-card {
+  height: 100px;
+  width: 100px;
+  padding-top: 10px;
+  padding-left: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  color: rgb (255,255,255);
+}
+
+.course-modal-left .course-card {
+  color: rgb(255,255,255);
+  padding-left: 20px;
+  padding-top: 5px;
+  font-size: 14px;
+}
+.course-modal-left .course-card:hover {
+  cursor: default;
+}
+
+.course-modal-left .button {
+  padding: 3px 10px;
+  border-radius: 5px;
+  margin-top: 5px;
+  border: 1px solid #55c4e9;
+  width: 125px;
+  font-size: 14px;
+}
+
+/*course-modal-right*/
+.course-modal-right {
+  display: inline-block;
+  width: 60%;
+  margin-left: 4%;
+  vertical-align: top;
+  margin-top: 10px;
+/*  border: 1px solid #000000*/;
+} /*end course-modal-right*/
+
+
+.course-modal-right li {
+  list-style-type:inherit;
+  font-size: 12px;
+  margin-left:15px;
+}
+
+/************************************
+ 4. REGISTER MODAL */
+.fa-arrow-left {
+  color: #DDD;
+}
+
+.modal-register {
+  width: 350px;
+  margin-left: -170px;
+  padding: 1% 1% 2% 1%;
+}
+
+.date-list {
+  list-style: none;
+  text-align: center;
+}
+
+.modal-register .button.button-it-date {
+  width: 280px;
+}
+
+
+.modal.ng-enter {
+  transition: opacity .5s ease-out;
+  opacity: 0;
+}
+.modal.ng-enter.ng-enter-active {
+  opacity: 1;
+}
+.modal.ng-leave {
+  transition: opacity .5s ease-out;
+  opacity: 1;
+}
+.modal.ng-leave.ng-leave-active {
+  opacity: 0;
+}

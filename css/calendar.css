@@ -1,0 +1,204 @@
+/* calendar */
+
+
+.fc {
+  width: 100%;
+  display:inline-block;
+  vertical-align: top;
+}
+
+
+.fc-toolbar {
+  padding: 0px 20px 0px 20px;
+  background-color: rgb(255,255,255);
+  width:100%;
+}
+.fc-toolbar .fc-center {
+  position: relative;
+  left: -6%;
+}
+
+
+.fc-day-grid-container {
+  background-color: rgb(255,255,255);
+}
+
+.fc-toolbar h2 {
+  color: #00a99d;
+  min-width: 230px;
+}
+
+
+.fc-toolbar .fc-button {
+  background: none;
+  border: none;
+  outline: 0;
+  box-shadow: none;
+  color: #00a99d;
+}
+
+
+.fc-toolbar .fc-button.fc-state-active,
+.fc-toolbar button {
+  border-radius: 0;
+  border-bottom: 5px solid #00a99d;
+}
+
+
+.fc-toolbar .fc-button.fc-state-active {
+  top: 3px;
+}
+
+
+.fc th {
+  border:none;
+}
+
+.fc-row {
+  max-height: 100px;
+}
+.fc-day.fc-sun,
+.fc-day.fc-sat {
+  background: #ededed;
+}
+.fc-event:hover {
+  cursor: pointer;
+}
+.fc-event.noclick:hover {
+  cursor: default;
+}
+
+.fc-view-container {
+  padding: 0 40px;
+  width: 100%;
+  transition: all 1s ease;
+}
+.fc-view-container.active {
+  width: 70%;
+}
+
+.fc-widget-header{
+  color: rgb(255,255,255);
+  padding: 10px;
+  background-color: #00a99d;
+}
+
+
+.fc-event {
+  background-color: rgb(85, 196, 233);
+  border: none;
+}
+.fc-event-container .fc-time-grid-event:not([style*='left: 0']) {
+  border: 2px solid #fff !important;
+}
+
+.calendar-event-register-btn {
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 6px;
+  width: 80px;
+  height: 30px;
+  font-weight: normal;
+  font-size: 14px;
+  margin-top: 20px;
+}
+
+
+.calendar-event-popup.active {
+   right:0px;
+}
+
+
+.calendar-event-popup {
+  padding-top:25px;
+  padding-left: 40px;
+  padding-right: 80px;
+  background-color: rgb(255,255,255);
+  box-shadow: 0px 4px 27.2px 4.8px rgba(0, 0, 0, 0.2);
+  margin-top: 55px;
+  width:29%;
+  position: absolute;
+  right: -39%;
+  top: 80px;
+  bottom: 0;
+  transition: 1s;
+}
+
+
+.calendar-event-title {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+
+.calendar-event-datetime {
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+
+.fa .fa-info-circle {
+  display: inline-block;
+}
+
+
+.calendar-event-details-control {
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.calendar-event-popup .course-objectives {
+  font-size: 12px;
+}
+
+.blackarrow-down {
+	width: 0;
+	height: 0;
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	border-top: 8px solid rgb(0, 0, 0);
+  display: inline-block;
+  margin-left:5px;
+}
+
+
+.calendar-event-popup .anchor {
+  top: 5px;
+}
+
+
+.calendar-event-popup .arrow-down {
+  position: absolute;
+  left: 140px;
+  margin-left: -5px;
+}
+
+/* legend */
+
+.legend-calendar{
+  height:40px;
+  margin-left: 40px;
+  margin-top:15px;
+}
+
+.legend-square-it{
+  height:10px;
+  width:10px;
+  background-color:#55c4e9;
+  display:inline-block;
+  margin-right:5px;
+}
+
+.legend-square-hr{
+  height:10px;
+  width:10px;
+  background-color:#ff8d7b;
+  display:inline-block;
+}
+
+.legend-icon{
+  display:inline-block;
+  padding-right:20px;
+}

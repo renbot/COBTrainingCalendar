@@ -1,0 +1,44 @@
+/* HEADER */
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  color: #fff;
+  background: #00a99d;
+  height: 85px;
+  width: 100%;
+  z-index: 100;
+}
+
+
+.headerlogo-1 img{
+  position:absolute;
+  width:120px;
+  margin-top: 20px;
+  margin-left: 15px;
+  padding-right: 10px;
+  border-right: 1px solid #ffffff;
+}
+
+.headerlogo-2 img{
+  width:200px;
+  margin-left: 140px;
+  margin-top:15px;
+  padding-right:0px;
+}
+
+.headertext {
+  margin-top: -70px;
+  margin-left: 330px;
+}
+
+/*
+.search {
+  color: #a7a9ac;
+  font:15pt;
+  position: absolute;
+  margin-top: 25px;
+  margin-left: 1400px;
+}
+*/

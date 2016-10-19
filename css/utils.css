@@ -1,0 +1,20 @@
+
+.right{
+  text-align: right;
+}
+.anchor {
+  position: relative;
+}
+
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.inline-block {
+  display: inline-block;
+}
