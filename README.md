@@ -52,8 +52,8 @@ The front and backend development occured concurrently. QA and QC tests were con
 <br>
 <b>Team</b>
 <br>
-Davy Chiu - backend development<br>
-Renée Mak - UX/UI design, front-end development<br>
+<a href="https://github.com/davychiu" target="_blank">Davy Chiu</a> - backend development<br>
+<a href="http://www.reneemak.com" target="_blank">Renée Mak</a> - UX/UI design, front-end development<br>
 Connnie Lee - front-end development<br>
 Stephanie Wren - course calendar maintenance for IT<br>
 Helen Johnston - course calendar maintenance for HR
