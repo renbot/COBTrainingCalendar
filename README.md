@@ -8,7 +8,7 @@ This course calendar was created for use by staff at the City of Burnaby in 2015
 <br>
 <b>User and Business Issues</b>
 
-The Departments of Information Technology (IT) and Human Resources (HR) ran two concurrent course calendars for all City staff. One of these course calendars was accessible to staff via an interactive pdf and the other as a printed course calendar. Both registry processes were manually maintained with staff (the users) having to email the deparments (IT and HR) to register for courses. Updates to courses were done manually and for the print-based calendar, this presented a particularly unique issue whereby the solution was for the department to email all City staff that there was an update to the course. 
+The Departments of Information Technology (IT) and Human Resources (HR) ran two concurrent course calendars for all City staff. One of these course calendars was accessible to staff via an interactive pdf and the other as a printed course calendar. Updates to courses were done manually and for the print-based calendar, this presented a particularly unique issue whereby the solution was for the department to email all City staff that there was an update to the course. 
 <br><br>This was creating a major usability issue for City staff with regards to ease of course discovery, course paths and registration as there were two separate calendars presented in very different manners and with different registration processes. Further, from a departmental viewpoint, advising staff of updates to the course calendars was a manual and a resource/time inefficient process. 
 
 
